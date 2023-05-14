@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>colorcat.js</title>
+    <h1>colorcat</h1>
+  </head>
+  <body>
+    <canvas id="pixel-canvas" width="100" height="100"></canvas>
+    <br>
+    <label for="color-picker">Selecciona un color:</label>
+    <input type="color" id="color-picker" onchange="updateColor()">
+    <br>
+    <button onclick="saveImage()">Guardar imagen</button>
+    
+    <script>
+      // Obtener el canvas y el contexto
+      var canvas = document.getElementById("pixel-canvas");
+      var context = canvas.getContext("2d");
+      
+      // Dibujar el pixel inicialmente en blanco
+      context.fillStyle = "#FFFFFF";
+      context.fillRect(0, 0, 100, 100);
+      
+      // Función para actualizar el color del pixel seleccionado
+      function updateColor() {
+        var colorPicker = document.getElementById("color-picker");
+        var color = colorPicker.value;
+        
+        // Obtener la posición del cursor en el canvas
+        var rect = canvas.getBoundingClientRect();
+        var x = event.clientX - rect.left;
+        var y = event.clientY - rect.top;
+        
+        // Dibujar el pixel con el nuevo color
+        context.fillStyle = color;
+        context.fillRect(x, y, 1, 1);
+      }
+      
+      // Función para guardar una imagen del canvas
+      function saveImage() {
+        var link = document.createElement("a");
+        link.download = "canvas.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      }
+    </script>
+  </body>
+</html>
