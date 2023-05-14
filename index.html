@@ -1,30 +1,38 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>colorcat</title>
-    <style>
-      canvas {
-        border: 1px solid black;
-      }
-    </style>
-  </head>
-  <body>
-    <canvas id="canvas" width="100" height="100"></canvas>
-    <br />
-    <label for="x">X:</label>
-    <input type="number" id="x" name="x" min="0" max="99" />
-    <label for="y">Y:</label>
-    <input type="number" id="y" name="y" min="0" max="99" />
-    <label for="color">Color:</label>
-    <input type="color" id="color" name="color" value="#000000" />
-    <button onclick="paintPixel()">Pintar</button>
-    <br />
-    <div>
-      <span>X:</span><span id="currentX"></span>
-      <span>Y:</span><span id="currentY"></span>
-    </div>
-    <br />
-    <button onclick="saveCanvas()">Guardar Imagen</button>
-    <script src="script.js"></script>
-  </body>
+<head>
+	<title>colorcat</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<h1>Dibujar en el Canvas</h1>
+	<p>Selecciona un color:</p>
+	<input type="color" id="colorPicker">
+	<br><br>
+	<canvas id="canvas" width="800" height="600"></canvas>
+	<br><br>
+	<button onclick="guardarImagen()">Guardar imagen</button>
+	
+	<script>
+		var canvas = document.getElementById("canvas");
+		var context = canvas.getContext("2d");
+		var pincelSize = 3;
+		
+		function dibujar(event) {
+			var x = event.clientX - canvas.offsetLeft;
+			var y = event.clientY - canvas.offsetTop;
+			context.fillStyle = document.getElementById("colorPicker").value;
+			context.fillRect(x, y, pincelSize, pincelSize);
+		}
+		
+		function guardarImagen() {
+			var link = document.createElement('a');
+			link.download = 'dibujo.png';
+			link.href = canvas.toDataURL()
+			link.click();
+		}
+		
+		canvas.addEventListener("mousemove", dibujar);
+	</script>
+</body>
 </html>
