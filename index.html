@@ -5,12 +5,12 @@
 	<meta charset="utf-8">
 	<style>
 		canvas {
-			border: 5px solid black;
+			border: 5px solid blue;
 		}
 	</style>
 </head>
 <body>
-	<h1>Dibujar en el Canvas</h1>
+	<h1>colorcat</h1>
 	<p>Selecciona un color:</p>
 	<input type="color" id="colorPicker">
 	<br><br>
@@ -37,6 +37,13 @@
 			link.href = canvas.toDataURL()
 			link.click();
 		}
+		
+		canvas.addEventListener("mousemove", function() {
+			canvas.style.cursor = "crosshair";
+		});
+		canvas.addEventListener("mouseleave", function() {
+			canvas.style.cursor = "default";
+		});
 		
 		canvas.addEventListener("mousemove", dibujar);
 	</script>
