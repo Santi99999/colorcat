@@ -16,9 +16,10 @@
 	<script>
 		var canvas = document.getElementById("canvas");
 		var context = canvas.getContext("2d");
-		var pincelSize = 3;
+		var pincelSize = 8;
 		
 		function dibujar(event) {
+			if (event.buttons !== 1) return;
 			var x = event.clientX - canvas.offsetLeft;
 			var y = event.clientY - canvas.offsetTop;
 			context.fillStyle = document.getElementById("colorPicker").value;
